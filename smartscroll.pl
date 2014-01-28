@@ -16,7 +16,7 @@ our %IRSSI = (
     contact     => 'firstname@lastname.com',
     name        => 'smartscroll',
     description => 'Limits autoscroll to a single page for inactive ' .
-                   'windows and adds a separator line to differentiate new' .
+                   'windows and adds a separator line to differentiate new ' .
                    'messages',
     license     => 'MIT',
     url         => 'http://poiru.net',
@@ -33,7 +33,8 @@ Irssi::signal_add('window changed', sub {
         }
 
         # Add the separator line and bookmark it.
-        $old_window->print('-' x 20, MSGLEVEL_NEVER);
+        # TODO: Make line width/style configurable.
+        $old_window->print('-' x 16, MSGLEVEL_NEVER);
         $old_window->view()->set_bookmark_bottom('smartscroll');
 
         $old_window->view()->set_scroll(0);
@@ -55,4 +56,3 @@ Irssi::signal_add('window changed', sub {
         $window->view()->set_scroll(1);
     }
 });
-
